@@ -1,72 +1,37 @@
 <! DOCTYPE html>  
 <html lang = "en">  
 <head>  
-<title> How to Create a TO-DO list using jQuery </title>  
     <meta charset = "utf-8" />  
+    <title> How to Create a TO-DO list using jQuery  </title>  
     <link rel = "stylesheet"  
         href =  
 "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">  
     <script src =  
 "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">  
 </script>  
-<script src =  
+    <script src =  
 "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">  
 </script>  
-<script src = "https://code.jquery.com/jquery-3.4.1.js"  
+    <script src = "https://code.jquery.com/jquery-3.4.1.js"  
             integrity=  
             "sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="  
             crossorigin="anonymous"> </script>  
-<style>  
-body {  
-  background: #093028;   
-background: -webkit-linear-gradient(to left, #093028 , #237A57);   
-background: linear-gradient(to left, #093028 , #237A57);   
-font-family: 'Roboto', sans-serif;  
-  cursor: default;  
-}  
-html {  
-  background: #093028;   
-background: -webkit-linear-gradient(to left, #093028 , #237A57);   
-background: linear-gradient(to left, #093028 , #237A57);   
-font-family: 'Roboto', sans-serif;  
-  cursor: default;  
-}  
-.removeall {  
-  float: right;  
-  font-size: 0.4em;  
-  margin-right: 0%;  
-  line-height: 30px;  
-  padding-left: 1em;  
-  cursor: pointer;  
-}  
-.add {  
-  float:right;  
-  cursor: pointer;  
-}  
-#container {  
-  background: #7D3B44;  
-  width: 360px;  
-  margin: 100px auto;  
-  box-shadow: 0 0 3px rgba(0,0,0, 1);  
-}  
-h1 {  
-  background: #ad5c67;  
-  color: white;  
-  margin: 0;  
-  padding: 10px 20px;  
-  text-transform: uppercase;  
-  font-size: 24px;  
-  font-weight: normal;  
-}  
-ul {  
-  list-style: none;  
-  margin: 0;  
-  padding: 0;  
-}  
-h3 {  
+</head>  
+    <style>  
+        .container {  
+            width: 80%;  
+            height: auto;  
+        }  
+        .foot {  
+            position: fixed;  
+            left: 10%;  
+            width: 80%;  
+            text-align: center;  
+        }  
+        h3 {  
   text-align: center;  
-  font-weight: bold;  
-  color: green;  
+  font-weight: normal;  
+  color: red;  
   text-transform: uppercase;  
   font-size: 1.5em;  
   white-space: nowrap;  
@@ -79,7 +44,7 @@ h3 {
 h2 {  
   text-align: center;  
   font-weight: bold;  
-  color: green;  
+  color: red;  
   text-transform: uppercase;  
   font-size: 2.5em;  
   white-space: nowrap;  
@@ -89,17 +54,11 @@ h2 {
   @include transition-property(font-size);  
   @include transition-duration(0.5s);  
 }  
-li {  
-  background: #66202A;  
-  max-height: 400px;  
-  line-height: 40px;  
-  color:  lightgray;  
-}  
-li:nth-child(2n) {  
-  background: #7D3B44;  
+.text-success {  
+    color: red;  
 }  
  body {  
-  color: #fff;  
+  color: red;  
   font-family: 'Raleway';  
   font-size: 1.6rem;  
   font-weight: 700;  
@@ -108,204 +67,67 @@ li:nth-child(2n) {
   margin: 0;  
   text-transform: uppercase;  
 }  
-.gradient-background {  
-  background: linear-gradient(10deg,#200c32,#d9edf7,#d7cac7);  
-  background-size: 180% 180%;  
-  animation: gradient-animation 9s ease infinite;  
+.alert-success {  
+    color: red;  
+    background-color: #dff0d8;  
+    font-family: 'Bangers', cursive;  
+    border-color: #d6e9c6;  
+     font-weight: bold;  
 }  
-@keyframes gradient-animation {  
-  0% {  
-    background-position: 0% 50%;  
-  }  
-  50% {  
-    background-position: 100% 50%;  
-  }  
-  100% {  
-    background-position: 0% 50%;  
-  }  
-}  
-.button {   
-  background-color: #000;  
-  color: #fff;  
-  position: relative;  
-  width: auto;  
-  display: block;  
-  padding: 14px 30px;  
-  box-sizing: border-box;  
-  float: left;  
-  left: 20%;  
-  transform: translateX(-50%);  
-  font-family: sans-serif;  
-  border-radius: 0 0 12px 12px;  
-  cursor: pointer;  
-  margin-right: 24px;  
-  -webkit-filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, .7));  
-  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, .7));  
-  z-index: 1;  
-}  
-.button {  
-  -webkit-transition: 0s;  
-  transition: 0s;  
-}  
-.button:before {  
-  -webkit-transition: 0s;  
-  transition: 0s;  
-}  
-.button:after {  
-  -webkit-transition: 0s;  
-  transition: 0s;  
-}  
-.button:before {  
-  content: " ";  
-  width: 24px;  
-  height: 24px;  
-  position: absolute;  
-  border-radius: 50%;  
-  z-index: -10;  
-  pointer-events: none;  
-}  
-.button:after {  
-  content: " ";  
-  width: 24px;  
-  height: 24px;  
-  position: absolute;  
-  border-radius: 50%;  
-  z-index: -10;  
-  pointer-events: none;  
-}  
-.button:before {  
-  left: -36px;  
-  top: -12px;  
-  border-top: 12px solid #000;  
-  border-right: 12px solid transparent;  
-  border-left: 12px solid transparent;  
-  border-bottom: 12px solid transparent;  
-  border-radius: 50%;  
-  transform: rotate(45deg);  
-}  
-.button:after {  
-  right: -36px;  
-  top: -12px;  
-  border-top: 12px solid #000;  
-  border-right: 12px solid transparent;  
-  border-left: 12px solid transparent;  
-  border-bottom: 12px solid transparent;  
-  border-radius: 50%;  
-  -webkit-transform: rotate(-45deg);  
-  -moz-transform: rotate(-45deg);  
-  -o-transform: rotate(-45deg);  
-  transform: rotate(-45deg);  
-}  
-.button:hover {  
-  background-color: pink;  
-  color: #000;  
-}  
-.button:hover:after {  
-  border-top: 12px solid pink;  
-}  
-input {  
-  font-size: 15px;  
-  text-align: center;  
-  letter-spacing: 1px;  
-  background: #a97757;  
-  width: 100%;  
-  border: none;  
-  box-sizing: border-box;  
-  padding: 13px 13px 13px 20px;  
-  color: white;  
-}  
-input:focus {  
-  background: #84593D;  
-  outline: none;  
-  border: 2px solid #84593D;  
-  color: white;  
-}  
-.completed {  
-  text-decoration: line-through;  
-  color: gray;  
-}  
-li:hover {  
-  cursor: pointer;  
-}  
-  
-span {  
-  background: #217353;  
-  height: 40px;  
-  margin-right: 20px;  
-  text-align: center;  
-  color: white;  
-  width: 0px;  
-  display: inline-block;  
-  transition: 0.2s linear;  
-  opacity: 0;  
-}  
-li:hover span {  
-  width: 40px;  
-  opacity: 1;  
-}  
-::-webkit-input-placeholder {   
-    color:  lightgray;  
-}  
-:-moz-placeholder {   
-   color:  lightgray;  
-   opacity:  1;  
-}  
-::-moz-placeholder {   
-   color:  lightgray;  
-   opacity:  1;  
-}  
-:-ms-input-placeholder {   
-   color:  lightgray;  
-}  
-</style>  
-<body class = "gradient-background">  
-<h2> Example </h2>  
-  <h3> How to Create a TO-DO list using jQuery </h3>    
-<div id = "container">  
-  <h1> To-Do List <i class ="removeall"> Clear </i> <i class = "add"> + </i> </h1>  
-  <input type = "text" placeholder = "Add New task">  
-  <ul>  
-    <li> <span> <i class = "fa fa-trash"> </i> </span> <number> </number> HTML </li>  
-    <li> <span> <i class = "fa fa-trash"> </i> </span> <number> </number> CSS </li>  
-    <li> <span> <i class = "fa fa-trash"> </i> </span> <number> </number> Javascript </li>  
-  </ul>  
-</div>  
-<script>  
-function updateNumbers() {  
-    var lists = document.querySelectorAll("number");  
-    for(var i = 0; i < lists.length; i++) {  
-      $(lists[i]).html(i+1 + ") ");  
-    }  
-}  
-updateNumbers();  
-$("ul").on("click", "li", function () {  
-  $(this).toggleClass("completed");  
-});  
-$("ul").on('click', "span", function (e) {  
-  e.stopPropagation();  
-  $(this).closest("li").fadeOut(500,function() {  
-   $(this).remove();  
-    updateNumbers();  
-  });  
-});  
-$(".removeall").on('click', function (e) {  
-    $("li").fadeOut(500, function() {  
-      $(this).remove();  
-    });  
-});  
-$("input[type='text']").keypress(function(e) {  
-  if(e.which === 13) {  
-    var todoText = $(this).val();  
-    if( $(this).val() !== "") {  
-    $("ul").append("<li> <span> <i class='fa fa-trash'> </i> </span>" + "<number></number>" + todoText + "</li>");  
-      }  
-    updateNumbers();  
-    $(this).val("");  
-  }  
-});  
-$(".add").click(function() {  
-  $("input[type='text']").fadeToggle(200);  
-});  
-</script>  
+    </style>  
+</head>  
+<body>  
+  <h2> Example </h2>  
+  <h3> How to Create a TO-DO list using jQuery </h3>      
+<br />  
+<br />  
+    <center>  
+        <div class = "foot">  
+            <div class = "row">  
+                <div class = "col-sm-1"> </div>  
+                <div class = "col-sm-10">  
+                    <div class = "input-group">  
+                        <input type = "text"  
+                            class = "form-control"  
+                            placeholder = "Add Task"  
+                            id = "text">  
+                        <div class = "input-group-btn">  
+                        <button class = "btn btn-success">  
+                        <i class = "glyphicon glyphicon-plus">  
+                            </i> </button>  
+                        </div>  
+                    </div>  
+                    <br>  
+                    <br>  
+                </div>  
+            </div>  
+        </div>  
+        <br>  
+        <h2 class = "text text-success"> List of Tasks: </h2>  
+        <br>  
+        <div class = "container">  
+        </div>  
+    </center>  
+    <script>  
+        $(document).ready(function() {  
+            $('.btn-success').click(function() {  
+                if ($('#text').val().length != 0) {  
+                    var x = $('.container').html();  
+                    var y =  
+        `<div class = "alert alert-success alert-dismissible fade in">  
+<a href = "#" class = "close" data-dismiss = "alert" aria-label = "close"> ? </a>  
+                        ` + $('#text').val() + `</div>`;  
+                    $('.container').html(y + x);  
+                    $('#text').val("");  
+                } else alert("Enter some Text!");  
+            });  
+            $(document).on('click', '.alert', function() {  
+                if ($(this).css('text-decoration-line') == "none")  
+                    $(this).css('text-decoration-line', 'line-through');  
+                else  
+                    $(this).css('text-decoration-line', 'none');  
+            });  
+        });  
+    </script>  
 </body>  
-</html>   
+</html>  
